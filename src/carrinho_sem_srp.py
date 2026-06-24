@@ -43,3 +43,53 @@ class CarrinhoCompra:
             self.enviar_email_confirmacao()
             return True
         return False
+
+# ============================================================
+# BLOCO DE EXECUÇÃO
+# ============================================================
+
+if __name__ == "__main__":
+
+    carrinho1 = CarrinhoCompra()
+
+    print("Itens:", carrinho1.exibir_itens())
+    print("Valor total:", carrinho1.exibir_valor_total())
+
+    # Descomenta para testar com mais itens:
+    carrinho1.adicionar_item("Bicicleta", 750.10)
+    # carrinho1.adicionar_item("Geladeira", 1950.15)
+    # carrinho1.adicionar_item("Tapete", 350.20)
+
+    print("Itens:", carrinho1.exibir_itens())
+    print("Valor total recalculado:", carrinho1.exibir_valor_total())
+    print("Status:", carrinho1.exibir_status())
+
+    carrinho1.adicionar_item('Televisão 65"', 3570.25)
+
+    if carrinho1.confirmar_pedido():
+        print("Pedido realizado com sucesso!")
+    else:
+        print("Erro na confirmação do pedido. Carrinho não possui itens.")
+
+    print("Status:", carrinho1.exibir_status())
+
+# ============================================================
+# RESULTADO ESPERADO NO TERMINAL
+# ============================================================
+#  Cliente pega o carrinho vazio
+#        ↓
+# Carrinho: []  →  R$ 0,00  →  status: aberto
+#        ↓
+# Cliente adiciona Televisão 65" por R$ 3.570,25
+#        ↓
+# Cliente clica em "Finalizar Pedido"
+#        ↓
+# Sistema valida: tem item? Sim 
+#       ↓
+# Sistema envia e-mail de confirmação 
+#        ↓
+# Pedido realizado com sucesso!
+#        ↓
+# status: confirmado
+#
+# Tudo isso está acontecendo dentro de uma única classe que faz tudo
