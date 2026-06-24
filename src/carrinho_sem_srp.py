@@ -5,7 +5,7 @@
 
 class CarrinhoCompra:
 
-    # --- Atributos ---
+    # --- Atributos que vamos trabalhar ---
     # itens       : lista de dicionários {"item": str, "valor": float}
     # status      : str  ("aberto" | "confirmado")
     # valor_total : float
