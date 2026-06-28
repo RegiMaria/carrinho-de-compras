@@ -28,7 +28,7 @@ class ItemCarrinho:
 class CarrinhoCompra:
 
     def __init__(self):
-        self.itens: list[ItemCarrinho] = []
+        self._itens: list[ItemCarrinho] = []
         self._valor_total: float = 0.0
 
     def adicionar_item(self,nome:str, valor:float)  -> bool:
