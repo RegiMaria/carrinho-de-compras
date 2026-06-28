@@ -50,7 +50,7 @@ class CarrinhoCompra:
 
 # ------------------------------------------------------------
 # 3. ValidadorCarrinho
-#    Responsabilidade: validar regras de negócio do carrinho.
+#    Responsabilidade: validar regras de negócio do carrinho
 # ------------------------------------------------------------
 class ValidadorCarrinho:
 
