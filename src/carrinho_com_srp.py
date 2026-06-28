@@ -46,3 +46,15 @@ class CarrinhoCompra:
     def get_itens(self) -> list[ItemCarrinho]:
         """Retorna a lista interna (usada por outras classes)."""
         return self._itens
+    
+
+# ------------------------------------------------------------
+# 3. ValidadorCarrinho
+#    Responsabilidade: validar regras de negócio do carrinho.
+# ------------------------------------------------------------
+class ValidadorCarrinho:
+
+    def validar(self, carrinho: CarrinhoCompra) -> bool:
+        """Retorna True se o carrinho possui pelo menos 1 item."""
+        return len(carrinho.get_itens()) > 0
+
