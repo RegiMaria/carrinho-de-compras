@@ -92,3 +92,34 @@ class PedidoService:
             return True
         return False
 
+
+
+# ============================================================
+# BLOCO DE EXECUÇÃO
+# ============================================================
+
+if __name__ == "__main__":
+
+    carrinho1 = CarrinhoCompra()
+    pedido1 = PedidoService()
+
+    print("Itens:", carrinho1.exibir_itens())
+    print("Valor total:", carrinho1.exibir_valor_total())
+
+    # Descomente para testar com mais itens:
+    # carrinho1.adicionar_item("Bicicleta", 750.10)
+    # carrinho1.adicionar_item("Geladeira", 1950.15)
+    # carrinho1.adicionar_item("Tapete", 350.20)
+
+    print("Itens:", carrinho1.exibir_itens())
+    print("Valor total recalculado:", carrinho1.exibir_valor_total())
+    print("Status:", pedido1.exibir_status())
+
+    carrinho1.adicionar_item('Televisão 65"', 3570.25)
+
+    if pedido1.confirmar_pedido(carrinho1):
+        print("Pedido realizado com sucesso!")
+    else:
+        print("Erro na confirmação do pedido. Carrinho não possui itens.")
+
+    print("Status:", pedido1.exibir_status())
