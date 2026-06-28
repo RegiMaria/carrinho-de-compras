@@ -58,3 +58,13 @@ class ValidadorCarrinho:
         """Retorna True se o carrinho possui pelo menos 1 item."""
         return len(carrinho.get_itens()) > 0
 
+
+# ------------------------------------------------------------
+# 4. EmailService
+#    Responsabilidade: enviar e-mails (confirmação, etc.).
+# ------------------------------------------------------------
+class EmailService:
+
+    def enviar_confirmacao(self):
+        print(".... envia e-mail de confirmação ....")
+
