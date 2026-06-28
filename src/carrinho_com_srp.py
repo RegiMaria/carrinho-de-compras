@@ -24,3 +24,25 @@ class ItemCarrinho:
     def to_dict(self) -> dict:
         return {"item": self.nome, "valor": self.valor}
 
+
+class CarrinhoCompra:
+
+    def __init__(self):
+        self.itens: list[ItemCarrinho] = []
+        self._valor_total: float = 0.0
+
+    def adicionar_item(self,nome:str, valor:float)  -> bool:
+        item = ItemCarrinho(nome,valor)
+        self._itens.append(item)
+        self._valor_total += valor
+        return True
+    
+    def exibir_itens(self) -> list[dict]:
+        return [i.to_dict() for i in self._itens]
+
+    def exibir_valor_total(self) -> float:
+        return self._valor_total
+
+    def get_itens(self) -> list[ItemCarrinho]:
+        """Retorna a lista interna (usada por outras classes)."""
+        return self._itens
