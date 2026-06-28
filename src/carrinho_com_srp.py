@@ -123,3 +123,20 @@ if __name__ == "__main__":
         print("Erro na confirmação do pedido. Carrinho não possui itens.")
 
     print("Status:", pedido1.exibir_status())
+
+"""
+O SRP funciona na prática.
+Cada classe fez apenas o seu trabalho:
+
+- CarrinhoCompra só gerenciou itens e total
+- ValidadorCarrinho só checou se tinha item
+- EmailService só enviou o e-mail
+- PedidoService só orquestrou tudo
+
+E o resultado final foi idêntico ao carrinho_sem_srp.py, mesma saída no terminal, mesmo fluxo, mas com o código organizado
+em responsabilidades separadas.
+
+Isso é exatamente o ponto do SRP: o comportamento não muda, a organização muda. 
+E essa organização é o que facilita manutenção, reuso e testes no futuro.
+
+"""
