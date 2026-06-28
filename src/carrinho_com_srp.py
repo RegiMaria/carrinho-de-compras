@@ -68,3 +68,27 @@ class EmailService:
     def enviar_confirmacao(self):
         print(".... envia e-mail de confirmação ....")
 
+
+
+# ------------------------------------------------------------
+# 5. PedidoService
+#    Responsabilidade: orquestrar a confirmação do pedido,
+#    coordenando validação, status e notificação.
+# ------------------------------------------------------------
+class PedidoService:
+
+    def __init__(self):
+        self._status: str = "aberto"
+        self._validador = ValidadorCarrinho()
+        self._email_service = EmailService()
+
+    def exibir_status(self) -> str:
+        return self._status
+
+    def confirmar_pedido(self, carrinho: CarrinhoCompra) -> bool:
+        if self._validador.validar(carrinho):
+            self._status = "confirmado"
+            self._email_service.enviar_confirmacao()
+            return True
+        return False
+
