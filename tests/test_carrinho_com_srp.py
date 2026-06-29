@@ -173,3 +173,49 @@ class TestEmailService:
         saida = capsys.readouterr().out
         assert "e-mail" in saida
 
+
+# ============================================================
+# TESTES - PedidoService
+# Responsabilidade testada: orquestrar a confirmação do pedido
+# ============================================================
+ 
+class TestPedidoService:
+ 
+    def test_status_inicial_e_aberto(self):
+        pedido = PedidoService()
+        assert pedido.exibir_status() == "aberto"
+ 
+    def test_confirmar_pedido_com_itens_retorna_true(self):
+        pedido = PedidoService()
+        carrinho = CarrinhoCompra()
+        carrinho.adicionar_item('Televisão 65"', 3570.25)
+        assert pedido.confirmar_pedido(carrinho) == True
+ 
+    def test_confirmar_pedido_sem_itens_retorna_false(self):
+        pedido = PedidoService()
+        carrinho = CarrinhoCompra()
+        assert pedido.confirmar_pedido(carrinho) == False
+ 
+    def test_status_muda_para_confirmado_apos_pedido(self):
+        pedido = PedidoService()
+        carrinho = CarrinhoCompra()
+        carrinho.adicionar_item('Televisão 65"', 3570.25)
+        pedido.confirmar_pedido(carrinho)
+        assert pedido.exibir_status() == "confirmado"
+ 
+    def test_status_nao_muda_se_carrinho_vazio(self):
+        pedido = PedidoService()
+        carrinho = CarrinhoCompra()
+        pedido.confirmar_pedido(carrinho)
+        assert pedido.exibir_status() == "aberto"
+ 
+    def test_dois_pedidos_independentes(self):
+        # Cada instância de PedidoService é independente
+        pedido1 = PedidoService()
+        pedido2 = PedidoService()
+        carrinho = CarrinhoCompra()
+        carrinho.adicionar_item("TV", 3570.25)
+        pedido1.confirmar_pedido(carrinho)
+        # pedido2 não confirmou - deve continuar aberto
+        assert pedido2.exibir_status() == "aberto"
+ 
