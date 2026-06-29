@@ -118,7 +118,7 @@ class TestCarrinhoCompra:
 
 
 # ============================================================
-# TESTES — ValidadorCarrinho
+# TESTES - ValidadorCarrinho
 # Responsabilidade testada: validar regras de negócio
 # ============================================================
  
@@ -146,3 +146,30 @@ class TestValidadorCarrinho:
         carrinho.adicionar_item("Geladeira", 1950.15)
         carrinho.adicionar_item("Tapete", 350.20)
         assert validador.validar(carrinho) == True 
+
+
+
+# ============================================================
+# TESTES - EmailService
+# Responsabilidade testada: enviar e-mails
+# ============================================================
+ 
+class TestEmailService:
+ 
+    def test_enviar_confirmacao_executa_sem_erro(self):
+        # O EmailService só imprime — verificamos que não lança exceção
+        email = EmailService()
+        try:
+            email.enviar_confirmacao()
+            executou = True
+        except Exception:
+            executou = False
+        assert executou == True
+ 
+    def test_enviar_confirmacao_imprime_mensagem(self, capsys):
+        # capsys é um recurso do pytest que captura o print()
+        email = EmailService()
+        email.enviar_confirmacao()
+        saida = capsys.readouterr().out
+        assert "e-mail" in saida
+
