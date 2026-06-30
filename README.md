@@ -23,14 +23,21 @@ This project focuses on the **S — Single Responsibility Principle**.
 ## Project Structure
 
 ```
+
+\`\`\`
 carrinho-de-compras/
 │
 ├── src/
 │   ├── carrinho_sem_srp.py   ← without SRP (one class does everything)
 │   └── carrinho_com_srp.py   ← with SRP (responsibilities separated)
 │
+├── tests/
+│   └── test_carrinho_com_srp.py   ← unit tests for SRP implementation
+│
 ├── index.py                  ← local web server (view in browser)
+├── requirements.txt
 └── README.md
+\`\`\`
 ```
 
 ---
@@ -49,6 +56,15 @@ One single class `CarrinhoCompra` handles everything:
 ### `carrinho_com_srp.py`
 Each class has one single responsibility.
 
+| Class | Responsibility |
+|-------|-----------------|
+| `ItemCarrinho` | Represents a product and its price |
+| `CarrinhoCompra` | Manages the list of items and total value |
+| `ValidadorCarrinho` | Validates business rules |
+| `EmailService` | Sends confirmation emails |
+| `PedidoService` | Orchestrates the order confirmation |
+
+**Benefit:** if you change the email logic, only `EmailService` changes. If you add a new validation rule, only `ValidadorCarrinho` changes. The rest of the code stays untouched.
 
 
 ### `index.py`
@@ -79,11 +95,30 @@ Then open your browser at:
 http://localhost:8000
 ```
 
+## Running the Tests
+
+This project uses `pytest`.
+
+\`\`\`bash
+# install dependencies
+pip install -r requirements.txt
+
+# run all tests
+pytest tests/test_carrinho_com_srp.py -v
+\`\`\`
+
+Each test class follows SRP too - one test class per responsibility tested:
+- `TestItemCarrinho`
+- `TestCarrinhoCompra`
+- `TestValidadorCarrinho`
+- `TestEmailService`
+- `TestPedidoService`
 ---
 
 ## Requirements
 
 - Python 3.10 or higher
+- pip install pytest
 - No external libraries needed
 
 ---
@@ -106,6 +141,7 @@ http://localhost:8000
 ## References
 
 1.[Agile Software Development](https://sites.google.com/site/unclebobconsultingllc/getting-a-solid-start): Principles, Patterns, and Practices - Uncle Bob
+
 2. [Clean Code(PT)](https://www.amazon.com.br/C%C3%B3digo-limpo-Robert-C-Martin/dp/8576082675/ref=sr_1_1_sspa?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=29P73QU0D2HGB&dib=eyJ2IjoiMSJ9.uqzFlAdb2__fCzeNdE3yfINuHBwVXD9B2YRU9wA4j-DJsSA_9ESEtIT3RfBmZXDwJ1mKkQfqbFdyk-QmMdtCYpMfleGTvKNPe3vBfiUxcjoWggJRbw2p7D0OmSxtfob42pdBV6YV9kbAL6i3CD-GiJLHTjNtkpiLdBJfygU_hTtEN0PlSihjdpIhv_uUdpWLd8j8vAE6zVxC3qDBz5w4VVkf-tbDExbNcCP7CfU_vjc.VkUVtibe-pNcQXkioP6Nxc85EXayBMTEjt3LtFYtyMM&dib_tag=se&keywords=clean+code&qid=1782390349&s=books&sprefix=clean+cod%2Cstripbooks%2C215&sr=1-1-spons&ufe=app_do%3Aamzn1.fos.b07885ca-1112-4aa2-9643-2c998a360229&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1) - Robert C. Martin (Uncle Bob)
 
 ---
